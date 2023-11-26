@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "337935498100",
+    "project_id": "techies-4fdb4",
+    "storage_bucket": "techies-4fdb4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:337935498100:android:04cdc02686b152118b0a21",
+        "android_client_info": {
+          "package_name": "com.example.techiess"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIGjBuLS5SwZDfR5XZDNIqqKqRlGBsGSU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
