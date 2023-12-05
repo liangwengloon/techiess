@@ -12,16 +12,16 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.techiess.ui.dashboard.DashboardFragment"
+        android:id="@+id/navigation_compare"
+        android:name="com.example.techiess.ui.compare.CompareFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_compare" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.techiess.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_cart"
+        android:name="com.example.techiess.ui.cart.CartFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_cart" />
 
     <fragment
         android:id="@+id/navigation_settings"
