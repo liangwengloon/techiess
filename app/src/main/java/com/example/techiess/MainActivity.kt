@@ -12,6 +12,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
+    var backPressedTime: Long = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,21 +31,36 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, forgotPassword::class.java)
             startActivity(intent)
         }
+        binding.signUpText.setOnClickListener {
+            // Create an Intent to start the ForgotPasswordActivity
+            val intent = Intent(this, signUp::class.java)
+            startActivity(intent)
+        }
+
+
         binding.loginButton.setOnClickListener {
             val email = binding.emailEditText.text.toString().trim()
             val password = binding.passwordEditText.text.toString().trim()
 
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Email and password are required", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Email and passworddf are required", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
-
-
             loginUser(email, password)
+
         }
     }
 
+    override fun onBackPressed() {
+        if (backPressedTime + 3000 > System.currentTimeMillis()) {
+            super.onBackPressed()
+            finishAffinity()
+        } else {
+            Toast.makeText(this, "Press back again to leave the app.", Toast.LENGTH_LONG).show()
+        }
+        backPressedTime = System.currentTimeMillis()
+    }
     private fun loginUser(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
@@ -51,8 +68,9 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "Successfully logged in", Toast.LENGTH_LONG).show()
                     val intent = Intent(this, Home::class.java)
                     startActivity(intent)
+                    finish()
                 } else {
-                    Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Login failed: really ${task.exception?.message}", Toast.LENGTH_LONG).show()
                 }
             }
     }
