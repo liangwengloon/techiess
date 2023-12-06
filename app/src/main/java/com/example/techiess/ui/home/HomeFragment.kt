@@ -1,6 +1,7 @@
 package com.example.techiess.ui.home
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.techiess.R
 import com.example.techiess.databinding.FragmentHomeBinding
+import com.example.techiess.productDetail
 import com.google.firebase.firestore.FirebaseFirestore
 
 class HomeFragment : Fragment() {
@@ -30,6 +32,10 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+
+
+
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
@@ -46,6 +52,17 @@ class HomeFragment : Fragment() {
 
         // Fetch data from Firebase
         fetchProductsFromFirebase()
+
+        productAdapter.setOnItemClickListener(object : ProductAdapter.OnItemClickListener {
+            override fun onItemClick(product: Product) {
+                // Handle item click, e.g., open ProductDetailActivity
+                val intent = Intent(requireContext(), productDetail::class.java)
+                intent.putExtra("title", product.title)
+                intent.putExtra("price", product.price)
+                intent.putExtra("image", product.imageResId)
+                startActivity(intent)
+            }
+        })
 
         return root
     }

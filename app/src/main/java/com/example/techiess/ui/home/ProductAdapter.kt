@@ -12,6 +12,18 @@ import com.example.techiess.R
 class ProductAdapter(private var productList: List<Product>) :
     RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
+    interface OnItemClickListener {
+        fun onItemClick(product: Product)
+    }
+
+    // Declare a listener variable
+    private var listener: OnItemClickListener? = null
+
+    // Set the listener
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.product_item, parent, false)
         return ViewHolder(view)
@@ -25,7 +37,13 @@ class ProductAdapter(private var productList: List<Product>) :
         Glide.with(holder.itemView.context)
             .load(product.imageResId)
             .into(holder.productImage)
+
+        holder.itemView.setOnClickListener {
+            listener?.onItemClick(product)
+        }
     }
+
+
 
     override fun getItemCount(): Int {
         return productList.size
