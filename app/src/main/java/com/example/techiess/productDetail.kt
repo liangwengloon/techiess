@@ -13,7 +13,7 @@ class productDetail : AppCompatActivity() {
 
         val title = intent.getStringExtra("title") ?: ""
         val price = intent.getStringExtra("price") ?: ""
-        val imageResId = intent.getIntExtra("image", R.drawable.logo)
+        val imageResId = intent.getStringExtra("image") ?: ""
 
         // Update UI with product details
         val productTitleTextView: TextView = findViewById(R.id.productTitleDetail)
