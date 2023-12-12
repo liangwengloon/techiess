@@ -33,9 +33,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-
-
-
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
@@ -60,6 +57,14 @@ class HomeFragment : Fragment() {
                 intent.putExtra("title", product.title)
                 intent.putExtra("price", product.price)
                 intent.putExtra("image", product.imageResId)
+                intent.putExtra("OS", product.OS)
+                intent.putExtra("battery", product.battery)
+                intent.putExtra("camera", product.camera)
+                intent.putExtra("category", product.category)
+                intent.putExtra("desc", product.desc)
+                intent.putExtra("display", product.display)
+                intent.putExtra("ram", product.ram)
+                intent.putExtra("rom", product.rom)
                 startActivity(intent)
             }
         })
@@ -87,9 +92,18 @@ class HomeFragment : Fragment() {
                     val price = document.getString("price") ?: ""
                     val image = document.getString("image") ?: ""
                     val category = document.getString("category") ?: ""
+                    val OS = document.getString("OS") ?: ""
+                    val battery = document.getString("battery") ?: ""
+                    val camera = document.getString("camera") ?: ""
+                    val desc = document.getString("desc") ?: ""
+                    val display = document.getString("display") ?: ""
+                    val ram = document.getString("ram") ?: ""
+                    val rom = document.getString("rom") ?: ""
+                    val productID = document.id
 
-                    val product = Product(title, price, image, category)
+                    val product = Product(title, price, image, category, OS, battery, camera, desc, display, ram, rom, productID)
                     productList.add(product)
+
                 }
 
                 // Update the RecyclerView adapter with the fetched data
