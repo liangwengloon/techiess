@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Border for the table cells -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#ffffff" /> <!-- Background color of the cell -->
+            <stroke
+                android:width="1dp"
+                android:color="#000000" /> <!-- Border color and width -->
+        </shape>
+    </item>
+</layer-list>

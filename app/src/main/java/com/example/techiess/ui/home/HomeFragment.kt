@@ -65,6 +65,8 @@ class HomeFragment : Fragment() {
                 intent.putExtra("display", product.display)
                 intent.putExtra("ram", product.ram)
                 intent.putExtra("rom", product.rom)
+                intent.putExtra("productID", product.productID)
+
                 startActivity(intent)
             }
         })
@@ -88,6 +90,7 @@ class HomeFragment : Fragment() {
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
+
                     val title = document.getString("title") ?: ""
                     val price = document.getString("price") ?: ""
                     val image = document.getString("image") ?: ""

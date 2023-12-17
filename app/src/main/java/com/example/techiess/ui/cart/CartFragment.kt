@@ -6,37 +6,60 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.example.techiess.databinding.FragmentCartBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.techiess.CartAdapter
+import com.example.techiess.CartItem
+import com.example.techiess.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class CartFragment : Fragment() {
 
-    private var _binding: FragmentCartBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var cartAdapter: CartAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val cartViewModel =
-            ViewModelProvider(this).get(CartViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_cart, container, false)
 
-        _binding = FragmentCartBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        recyclerView = root.findViewById(R.id.recyclerViewCart)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        cartAdapter = CartAdapter()
+        recyclerView.adapter = cartAdapter
 
-        val textView: TextView = binding.textCart
-        cartViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        // Load user's cart data
+        loadUserCartData()
+
         return root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun loadUserCartData() {
+        val user = FirebaseAuth.getInstance().currentUser
+        val uid = user?.uid
+
+        if (uid != null) {
+            val cartReference =
+                FirebaseFirestore.getInstance().collection("cart").document(uid)
+                    .collection("user_cart")
+
+            cartReference.addSnapshotListener { snapshot, e ->
+                if (e != null) {
+                    // Handle error
+                    return@addSnapshotListener
+                }
+
+                if (snapshot != null && snapshot.documents.isNotEmpty()) {
+                    val cartItems = snapshot.toObjects(CartItem::class.java)
+                    cartAdapter.setItems(cartItems)
+                } else {
+                    // No data
+                    // You can show a message indicating an empty cart
+                }
+            }
+        }
     }
 }
