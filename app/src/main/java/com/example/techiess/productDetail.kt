@@ -102,7 +102,7 @@ class productDetail : AppCompatActivity() {
                 "productImage" to imageResId,
                 "productName" to title,
                 "productPrice" to price,
-                "quantity" to quantity.toString()
+                "quantity" to quantity // Store quantity as an integer, not a string
             )
 
             val user = FirebaseAuth.getInstance().currentUser
@@ -131,10 +131,10 @@ class productDetail : AppCompatActivity() {
                         } else {
                             // Product found in cart, update the existing document with new quantity
                             val existingDocumentId = result.documents[0].id
-                            val existingQuantity = result.documents[0].getString("quantity")?.toInt() ?: 0
+                            val existingQuantity = result.documents[0].getLong("quantity")?.toInt() ?: 0
                             val newQuantity = existingQuantity + quantity
                             userCartRef.document(existingDocumentId)
-                                .update("quantity", newQuantity.toString())
+                                .update("quantity", newQuantity) // Store quantity as an integer, not a string
                                 .addOnSuccessListener {
                                     Toast.makeText(this, "Cart updated.", Toast.LENGTH_LONG).show()
                                     Log.d(TAG, "DocumentSnapshot updated with ID: $existingDocumentId")
@@ -151,6 +151,7 @@ class productDetail : AppCompatActivity() {
                     }
             }
         }
+
 
 
     }
