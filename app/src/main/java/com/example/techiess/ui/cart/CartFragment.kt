@@ -1,5 +1,6 @@
 package com.example.techiess.ui.cart
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,7 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.techiess.CartAdapter
 import com.example.techiess.CartItem
+import com.example.techiess.Checkout
 import com.example.techiess.R
+import com.example.techiess.signUp
 import com.google.android.play.core.integrity.e
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,6 +26,8 @@ class CartFragment : Fragment(), CartAdapter.CartItemClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var cartAdapter: CartAdapter
+    private lateinit var btnCheckout: Button
+    private lateinit var tvTotalAmount: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +44,20 @@ class CartFragment : Fragment(), CartAdapter.CartItemClickListener {
         // Set click listener for the adapter
         cartAdapter.setCartItemClickListener(this)
 
+        btnCheckout = root.findViewById(R.id.btnCheckout)
+        tvTotalAmount = root.findViewById(R.id.tvTotalAmount)
+
+       // fetchProductDataAndCalculateTotalAmount()
+
+        // Set click listener for the checkout button
+        btnCheckout.setOnClickListener {
+
+
+            val intent = Intent(requireContext(), Checkout::class.java)
+            startActivity(intent)
+            // Navigate to the checkout activity
+        }
+
         // Load user's cart data
         loadUserCartData()
 
@@ -53,6 +72,49 @@ class CartFragment : Fragment(), CartAdapter.CartItemClickListener {
 
 
     }
+
+    private fun fetchProductDataAndCalculateTotalAmount() {
+        val user = FirebaseAuth.getInstance().currentUser
+        val uid = user?.uid
+
+        if (uid != null) {
+            val cartReference =
+                FirebaseFirestore.getInstance().collection("cart").document(uid)
+                    .collection("user_cart")
+
+            cartReference.get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val cartItems = task.result?.toObjects(CartItem::class.java)
+
+                    if (cartItems != null && cartItems.isNotEmpty()) {
+                        // Calculate total amount
+                        val totalAmount = calculateTotalAmount(cartItems)
+                        tvTotalAmount.text = "Total: $totalAmount"
+
+                        // Navigate to the checkout activity
+
+                    } else {
+                        Log.d("CartFragment", "No items in the cart.")
+                    }
+                } else {
+                    Log.e("CartFragment", "Error getting cart items: ", task.exception)
+                }
+            }
+        }
+    }
+    private fun calculateTotalAmount(cartItems: List<CartItem>): Double {
+        var totalAmount = 0.0
+
+        // Iterate through cart items and calculate total amount
+        for (cartItem in cartItems) {
+            totalAmount += cartItem.productPrice * cartItem.quantity
+            Log.d("Price", " The current Item $totalAmount")
+        }
+
+        return totalAmount
+    }
+
+
 
     override fun onMinusButtonClick(position: Int) {
         // Decrease quantity in the CartItem object and update Firebase
@@ -74,24 +136,49 @@ class CartFragment : Fragment(), CartAdapter.CartItemClickListener {
                 FirebaseFirestore.getInstance().collection("cart").document(uid!!)
                     .collection("user_cart")
 
-
             val currentItem = cartAdapter.getItem(position)
-            val documentId = currentItem.id
 
+            // Query to find the specific document based on productId
+            val query = cartReference.whereEqualTo("productID", currentItem.productID)
 
-        // This is not showing any document ID , how to retrieve itself ID
-            Log.d("CartFragment", "Deleting item at position $position with documentId: $documentId")
+            query.get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val documents = task.result?.documents
+                    if (documents != null && documents.isNotEmpty()) {
+                        // Found the document, get the first document snapshot
+                        val documentSnapshot = documents[0]
 
-            cartReference.document(documentId).delete()
-                .addOnSuccessListener {
-                    Log.d("CartFragment", "Item deleted successfully")
+                        // Now you have the document snapshot, you can access its data or perform other operations
+
+                        // Delete the document
+                        documentSnapshot.reference.delete()
+                            .addOnSuccessListener {
+                                Log.d("CartFragment", "Item deleted successfully")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e("CartFragment", "Failed to delete item", e)
+                            }
+                    } else {
+                        Log.d("CartFragment", "Document not found for product ID: ${currentItem.productID}")
+                    }
+                } else {
+                    Log.e("CartFragment", "Error getting documents: ", task.exception)
                 }
-                .addOnFailureListener { e ->
-                    Log.e("CartFragment", "Failed to delete item", e)
-                }
+            }
         }
     }
 
+
+    private fun navigateToCheckout(totalAmount: Double) {
+        // Create an Intent to start the CheckoutActivity
+        val intent = Intent(requireContext(), Checkout::class.java)
+
+        // Put the necessary data into the Intent
+        intent.putExtra("total_amount", totalAmount)
+
+        // Start the CheckoutActivity
+        startActivity(intent)
+    }
 
 
     private fun updateQuantity(cartItem: CartItem, quantityChange: Int) {
@@ -170,6 +257,8 @@ class CartFragment : Fragment(), CartAdapter.CartItemClickListener {
                 if (snapshot != null && snapshot.documents.isNotEmpty()) {
                     val cartItems = snapshot.toObjects(CartItem::class.java)
                     cartAdapter.setItems(cartItems)
+                    fetchProductDataAndCalculateTotalAmount()
+
                 } else {
                     // No data
                     // You can show a message indicating an empty cart

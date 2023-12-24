@@ -66,7 +66,7 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
         Log.d("CartAdapter", "Image URL: ${currentItem.productID}")
 
         holder.productName.text = currentItem.productName
-        holder.productPrice.text = "Price: ${currentItem.productPrice}"
+        holder.productPrice.text = "Price: ${currentItem.productPrice.toString()}"
         holder.quantity.text = "${currentItem.quantity}"
 
 
@@ -107,6 +107,10 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
         holder.deleteButton.setOnClickListener {
             clickListener?.onDeleteButtonClick(position)
         }
+    }
+
+    fun getItems(): List<CartItem> {
+        return cartItems
     }
 
     override fun getItemCount(): Int {

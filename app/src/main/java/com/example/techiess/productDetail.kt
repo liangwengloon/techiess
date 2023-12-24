@@ -25,7 +25,7 @@ class productDetail : AppCompatActivity() {
         setContentView(R.layout.activity_product_detail)
 
         val title = intent.getStringExtra("title") ?: ""
-        val price = intent.getStringExtra("price") ?: ""
+        val price = intent.getDoubleExtra("price", 0.0) // 0.0 is the default value
         val imageResId = intent.getStringExtra("image") ?: ""
         val os = intent.getStringExtra("OS") ?: ""
         val battery = intent.getStringExtra("battery") ?: ""
@@ -44,7 +44,8 @@ class productDetail : AppCompatActivity() {
         val productImageImageView: ImageView = findViewById(R.id.productImageDetail)
 
         productTitleTextView.text = title
-        productPriceTextView.text = price
+        productPriceTextView.text = price.toString()
+
         Glide.with(this)
             .load(imageResId)
             .into(productImageImageView)

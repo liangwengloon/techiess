@@ -90,9 +90,8 @@ class HomeFragment : Fragment() {
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-
                     val title = document.getString("title") ?: ""
-                    val price = document.getString("price") ?: ""
+                    val price = document.getDouble("price") ?: 0.0
                     val image = document.getString("image") ?: ""
                     val category = document.getString("category") ?: ""
                     val OS = document.getString("OS") ?: ""
@@ -106,7 +105,6 @@ class HomeFragment : Fragment() {
 
                     val product = Product(title, price, image, category, OS, battery, camera, desc, display, ram, rom, productID)
                     productList.add(product)
-
                 }
 
                 // Update the RecyclerView adapter with the fetched data
@@ -118,4 +116,5 @@ class HomeFragment : Fragment() {
 
         Log.d("HomeFragment", "Fetched ${productList.size} products from Firestore")
     }
+
 }

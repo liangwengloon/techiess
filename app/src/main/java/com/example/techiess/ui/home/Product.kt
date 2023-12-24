@@ -2,7 +2,7 @@ package com.example.techiess.ui.home
 
 data class Product(
     val title: String,
-    val price: String,
+    val price: Double,
     val imageResId: String = "",
     val category: String,
     val OS: String = "",

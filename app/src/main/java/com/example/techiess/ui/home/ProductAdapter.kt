@@ -32,7 +32,7 @@ class ProductAdapter(private var productList: List<Product>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = productList[position]
         holder.productTitle.text = product.title
-        holder.productPrice.text = product.price
+        holder.productPrice.text = product.price.toString() // Convert Double to String
 
         Glide.with(holder.itemView.context)
             .load(product.imageResId)
@@ -42,8 +42,6 @@ class ProductAdapter(private var productList: List<Product>) :
             listener?.onItemClick(product)
         }
     }
-
-
 
     override fun getItemCount(): Int {
         return productList.size
@@ -61,5 +59,6 @@ class ProductAdapter(private var productList: List<Product>) :
         val productImage: ImageView = itemView.findViewById(R.id.productImage)
     }
 }
+
 
 
