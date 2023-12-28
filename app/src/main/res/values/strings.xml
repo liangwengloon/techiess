@@ -8,4 +8,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="title_activity_sign_up">signUp</string>
+
+    <string-array name="payment_methods">
+        <item>Online Banking</item>
+        <item>Touch n Go E-wallet</item>
+        <item>Credit/Debit Card</item>
+    </string-array>
 </resources>

@@ -8,7 +8,8 @@
     android:fillViewport="true"
     tools:context=".Checkout">
 
-    <!-- need to fix about the -,+ and delete button in recycler view-->
+
+
     <!--insert three more images here  step1 , step2, step3 -->
     <!--for the name, address and phone number will be in step2 -->
     <RelativeLayout
@@ -40,6 +41,41 @@
     </RelativeLayout>
 
 
+    <ImageView
+        android:id="@+id/step1Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/step1red"
+        app:layout_constraintTop_toBottomOf="@+id/blueTopBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/step2Image"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"/>
+
+    <!-- Step 2 Image -->
+    <ImageView
+        android:id="@+id/step2Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/step2"
+        app:layout_constraintTop_toBottomOf="@+id/blueTopBar"
+        app:layout_constraintStart_toEndOf="@+id/step1Image"
+        app:layout_constraintEnd_toStartOf="@+id/step3Image"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"/>
+
+    <!-- Step 3 Image -->
+    <ImageView
+        android:id="@+id/step3Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/step3"
+        app:layout_constraintTop_toBottomOf="@+id/blueTopBar"
+        app:layout_constraintStart_toEndOf="@+id/step2Image"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"/>
+
     <TextView
         android:id="@+id/tVConfirmCart"
         android:layout_width="0dp"
@@ -48,7 +84,7 @@
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/blueTopBar"
+        app:layout_constraintTop_toBottomOf="@+id/step1Image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 

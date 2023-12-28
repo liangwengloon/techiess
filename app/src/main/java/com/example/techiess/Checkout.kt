@@ -7,8 +7,10 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.techiess.SimpleCartAdapter
 import com.example.techiess.CartAdapter
 import com.example.techiess.CartItem
 import com.example.techiess.R
@@ -19,7 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 class Checkout : AppCompatActivity() {
 
     private lateinit var recyclerViewCartConfirmation: RecyclerView
-    private lateinit var cartAdapter: CartAdapter
+    private lateinit var simpleCartAdapter: SimpleCartAdapter
+
     private lateinit var tvTotalAmountConfirmation: TextView
     private lateinit var editTextName: EditText
     private lateinit var editTextPhone: EditText
@@ -32,8 +35,8 @@ class Checkout : AppCompatActivity() {
 
         recyclerViewCartConfirmation = findViewById(R.id.recyclerViewCartConfirmation)
         recyclerViewCartConfirmation.layoutManager = LinearLayoutManager(this)
-        cartAdapter = CartAdapter()
-        recyclerViewCartConfirmation.adapter = cartAdapter
+        simpleCartAdapter  = SimpleCartAdapter()
+        recyclerViewCartConfirmation.adapter = simpleCartAdapter
 
         tvTotalAmountConfirmation = findViewById(R.id.tvTotalAmountConfirmation)
 
@@ -44,8 +47,12 @@ class Checkout : AppCompatActivity() {
 
         // Set click listener for the checkout button
         btnConfirmCheckout.setOnClickListener {
-            // Add your logic to save user details and proceed with the checkout
-            // Use the values from editTextName, editTextPhone, editTextAddress, and tvTotalAmountConfirmation
+
+
+
+                val intent = Intent(this, Information::class.java)
+                startActivity(intent)
+
         }
 
         val backButton = findViewById<ImageView>(R.id.backButton)
@@ -76,11 +83,11 @@ class Checkout : AppCompatActivity() {
 
                 if (snapshot != null && snapshot.documents.isNotEmpty()) {
                     val cartItems = snapshot.toObjects(CartItem::class.java)
-                    cartAdapter.setItems(cartItems)
+                    simpleCartAdapter.setItems(cartItems)
 
                     // Calculate total amount
                     val totalAmount = calculateTotalAmount(cartItems)
-                    tvTotalAmountConfirmation.text = "Total: $totalAmount"
+                    tvTotalAmountConfirmation.text = "Total: RM $totalAmount"
 
                 } else {
                     // No data

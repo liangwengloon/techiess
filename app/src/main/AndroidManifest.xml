@@ -13,7 +13,10 @@
         android:theme="@style/Theme.Techiess"
         tools:targetApi="31">
         <activity
-            android:name=".ExpandableTextView"
+            android:name=".Fpx"
+            android:exported="false" />
+        <activity
+            android:name=".Information"
             android:exported="false" />
         <activity
             android:name=".Checkout"

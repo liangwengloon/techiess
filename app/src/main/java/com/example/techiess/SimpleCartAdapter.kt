@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -14,39 +13,16 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
-class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+class SimpleCartAdapter : RecyclerView.Adapter<SimpleCartAdapter.SimpleCartViewHolder>() {
 
     private var cartItems: List<CartItem> = emptyList()
 
-    // ViewHolder class
-
-    interface CartItemClickListener {
-        fun onPlusButtonClick(position: Int)
-        fun onMinusButtonClick(position: Int)
-        fun onDeleteButtonClick(position: Int)
-    }
-    private var clickListener: CartItemClickListener? = null
-
-    fun setCartItemClickListener(listener: CartItemClickListener) {
-        clickListener = listener
-    }
-
-
-
-    class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class SimpleCartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productImage: ImageView = itemView.findViewById(R.id.imageProduct)
         val productName: TextView = itemView.findViewById(R.id.textProductName)
         val productPrice: TextView = itemView.findViewById(R.id.textProductPrice)
         val quantity: TextView = itemView.findViewById(R.id.textQuantity)
-        val plusButton: Button = itemView.findViewById(R.id.plusButton)
-        val minusButton: Button = itemView.findViewById(R.id.minusButton)
-        val deleteButton: Button = itemView.findViewById(R.id.deleteButton)
     }
 
     // Set items to the adapter
@@ -54,32 +30,29 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
         cartItems = items
         notifyDataSetChanged()
     }
+
     fun getItem(position: Int): CartItem {
         return cartItems[position]
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_cart, parent, false)
-        return CartViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleCartViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_simple_cart, parent, false)
+        return SimpleCartViewHolder(view)
     }
 
-
-
-    override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SimpleCartViewHolder, position: Int) {
         val currentItem = cartItems[position]
 
-        Log.d("CartAdapter", "Image URL: ${currentItem.productImage}")
-        // Bind data to UI element//
-        Log.d("CartAdapter", "Image URL: ${currentItem.productID}")
+        Log.d("SimpleCartAdapter", "Image URL: ${currentItem.productImage}")
+        Log.d("SimpleCartAdapter", "Image URL: ${currentItem.productID}")
 
         holder.productName.text = currentItem.productName
-        holder.productPrice.text = "Price: ${currentItem.productPrice.toString()}"
-        holder.quantity.text = "${currentItem.quantity}"
-
+        holder.productPrice.text = "RM: ${currentItem.productPrice.toString()}"
+        holder.quantity.text = "Qty: ${currentItem.quantity}"
 
         Glide.with(holder.itemView.context)
             .load(currentItem.productImage)
-            .override(300, 300)  // Set the desired width and height
+            .override(300, 300)
             .listener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(
                     e: GlideException?,
@@ -102,18 +75,6 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
                 }
             })
             .into(holder.productImage)
-
-        holder.plusButton.setOnClickListener {
-            clickListener?.onPlusButtonClick(position)
-        }
-
-        holder.minusButton.setOnClickListener {
-            clickListener?.onMinusButtonClick(position)
-        }
-
-        holder.deleteButton.setOnClickListener {
-            clickListener?.onDeleteButtonClick(position)
-        }
     }
 
     fun getItems(): List<CartItem> {
@@ -123,8 +84,8 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
     override fun getItemCount(): Int {
         return cartItems.size
     }
+
     override fun getItemId(position: Int): Long {
         return cartItems[position].id.hashCode().toLong()
     }
-
 }

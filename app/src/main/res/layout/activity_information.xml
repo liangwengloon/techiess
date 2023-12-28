@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Information">
+
+
+    <RelativeLayout
+        android:id="@+id/blueTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#4A90E2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Techies"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:layout_marginTop="20dp"/>
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/baseline_arrow_back_24"/>
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/step1Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/step1"
+        app:layout_constraintTop_toBottomOf="@+id/blueTopBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/step2Image"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"/>
+
+    <!-- Step 2 Image -->
+    <ImageView
+        android:id="@+id/step2Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/step2red"
+        app:layout_constraintTop_toBottomOf="@+id/blueTopBar"
+        app:layout_constraintStart_toEndOf="@+id/step1Image"
+        app:layout_constraintEnd_toStartOf="@+id/step3Image"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"/>
+
+    <!-- Step 3 Image -->
+    <ImageView
+        android:id="@+id/step3Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/step3"
+        app:layout_constraintTop_toBottomOf="@+id/blueTopBar"
+        app:layout_constraintStart_toEndOf="@+id/step2Image"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"/>
+
+    <TextView
+        android:id="@+id/tVBillingAdd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Fill Up Your Billing Address"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+
+        app:layout_constraintTop_toBottomOf="@+id/step1Image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="0dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:padding="15dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/et_cust"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        app:layout_constraintTop_toBottomOf="@+id/tVBillingAdd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+
+        android:inputType="text"/>
+
+    <!-- Edit Text for Phone -->
+    <EditText
+        android:id="@+id/etPhone"
+        android:layout_width="0dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+
+        android:layout_height="wrap_content"
+        android:hint="Phone"
+        app:layout_constraintTop_toBottomOf="@+id/etName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:padding="15dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/et_cust"
+        android:inputType="phone"/>
+
+    <!-- Edit Text for Address Line 1 -->
+    <EditText
+        android:id="@+id/etAddressLine1"
+        android:layout_width="0dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_height="wrap_content"
+        android:hint="Address Line 1"
+        android:padding="15dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/et_cust"
+        app:layout_constraintTop_toBottomOf="@+id/etPhone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:inputType="text"/>
+
+    <!-- Edit Text for Address Line 2 -->
+    <EditText
+        android:id="@+id/etAddressLine2"
+        android:layout_width="0dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_height="wrap_content"
+        android:hint="Address Line 2"
+        android:padding="15dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/et_cust"
+        app:layout_constraintTop_toBottomOf="@+id/etAddressLine1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:inputType="text"/>
+
+
+
+    <!-- Edit Text for Postcode -->
+    <EditText
+        android:id="@+id/etPostcode"
+        android:layout_width="0dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+
+        android:layout_height="wrap_content"
+        android:hint="Postcode"
+        android:padding="15dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/et_cust"
+        app:layout_constraintTop_toBottomOf="@+id/etAddressLine2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:inputType="number"/>
+
+
+
+    <TextView
+        android:id="@+id/tvPayment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Please Select Your Payment Method"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#FF0000"
+        android:layout_marginTop="20dp"
+
+        app:layout_constraintTop_toBottomOf="@+id/etPostcode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- Dropdown List for Payment Method -->
+
+    <Spinner
+        android:id="@+id/spinnerPaymentMethod"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvPayment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:entries="@array/payment_methods"/>
+
+    <Button
+        android:id="@+id/btnContinue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CONTINUE"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
