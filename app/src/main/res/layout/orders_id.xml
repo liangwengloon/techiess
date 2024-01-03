@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:columnCount="2"
+    android:rowCount="2"
+    android:padding="16dp">
+
+    <!-- 1st row: Order ID -->
+    <TextView
+        android:id="@+id/textOrderID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="2"
+        android:text="textOrderID"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"/>
+
+    <!-- 2nd row: Images and Product Details -->
+
+    <!-- 1st column: Container for product images -->
+    <LinearLayout
+        android:id="@+id/imagesRecyclerViewContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_column="0">
+
+    </LinearLayout>
+
+    <!-- 2nd column: Container for order details -->
+    <TextView
+        android:id="@+id/textProductDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="textProductDetails"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_column="1"/>
+</GridLayout>

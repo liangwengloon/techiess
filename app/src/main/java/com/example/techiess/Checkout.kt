@@ -40,18 +40,17 @@ class Checkout : AppCompatActivity() {
 
         tvTotalAmountConfirmation = findViewById(R.id.tvTotalAmountConfirmation)
 
-        btnConfirmCheckout = findViewById(R.id.btnConfirmCheckout)
+
 
         // Load user's cart data
         loadUserCartData()
 
+        btnConfirmCheckout = findViewById(R.id.btnConfirmCheckout)
         // Set click listener for the checkout button
         btnConfirmCheckout.setOnClickListener {
-
-
-
                 val intent = Intent(this, Information::class.java)
                 startActivity(intent)
+                finish()
 
         }
 

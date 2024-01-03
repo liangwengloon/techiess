@@ -13,6 +13,17 @@
         android:theme="@style/Theme.Techiess"
         tools:targetApi="31">
         <activity
+            android:name=".Comparison"
+            android:exported="false"
+            android:label="@string/title_activity_comparison"
+            android:theme="@style/Theme.Techiess.NoActionBar" />
+        <activity
+            android:name=".ProductImageAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".Orders"
+            android:exported="false" />
+        <activity
             android:name=".Fpx"
             android:exported="false" />
         <activity

@@ -1,10 +1,12 @@
 package com.example.techiess.ui.home
 
+import java.io.Serializable
+
 data class Product(
-    val title: String,
-    val price: Double,
+    val title: String = "",
+    val price: Double = 0.0,
     val imageResId: String = "",
-    val category: String,
+    val category: String = "",
     val OS: String = "",
     val battery: String = "",
     val camera: String = "",
@@ -12,5 +14,7 @@ data class Product(
     val display: String = "",
     val ram: String = "",
     val rom: String = "",
-    val productID: String = ""
-)
+    val productID: String = "",
+    var documentID: String = ""
+) : Serializable
+
