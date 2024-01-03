@@ -15,7 +15,7 @@
         <item>Credit/Debit Card</item>
     </string-array>
     <string name="title_activity_comparison">Comparison</string>
-    <string name="price_format">Price: $%s</string>
+    <string name="price_format">Price: RM %s</string>
     <string name="tab_text_1">Product 1</string>
     <string name="tab_text_2">Product 2</string>
 </resources>

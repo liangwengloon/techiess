@@ -1,8 +1,10 @@
 package com.example.techiess
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
@@ -64,11 +66,15 @@ class Comparison : AppCompatActivity() {
                 updateFragmentData(1)
             }
         }
+
+        val backButton = findViewById<ImageView>(R.id.backButton)
+
+        backButton.setOnClickListener {
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
-
-
-    // ... (rest of the code)
-
     private fun fetchProductDetails(docId: String, callback: (Product) -> Unit) {
         // Log statement to trace the flow
         Log.d("Comparison", "fetchProductDetails: Start")

@@ -1,6 +1,7 @@
 package com.example.techiess.ui.main
 
 import android.content.ContentValues
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,9 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.techiess.R
 import com.example.techiess.databinding.FragmentComparisonBinding
 import com.example.techiess.ui.home.Product
+import com.squareup.picasso.Picasso
 
 /**
  * A placeholder fragment containing a simple view.
@@ -37,7 +43,7 @@ class PlaceholderFragment : Fragment() {
         return root
     }
 
-     fun updateProductDetails(product: Product) {
+    fun updateProductDetails(product: Product) {
 
         val formattedPrice = String.format("%.2f", product.price)
 
@@ -53,13 +59,19 @@ class PlaceholderFragment : Fragment() {
         binding.romDetail.text = product.rom
         binding.descDetail.text = product.desc
 
-        // Update ImageView using Glide for efficient image loading
-        Glide.with(this)
-            .load(product.imageResId)
-            .into(binding.productImageDetail)
-         Log.d(ContentValues.TAG, "Selected Image : ${product.imageResId}")
-
-     }
+        // Update ImageView using Picasso for efficient image loading
+        if (!product.image.isNullOrEmpty()) {
+            // Update ImageView using Picasso for efficient image loading
+            Picasso.get()
+                .load(product.image)
+                .into(binding.productImageDetail)
+        } else {
+            // Handle the case where imageResId is empty or null
+            Log.e(ContentValues.TAG, "Invalid imageResId: ${product.image}")
+            // You can provide a placeholder image or handle this case based on your requirements
+            // For example, you might want to set a default image or show an error placeholder.
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -78,5 +90,4 @@ class PlaceholderFragment : Fragment() {
             }
         }
     }
-
 }
