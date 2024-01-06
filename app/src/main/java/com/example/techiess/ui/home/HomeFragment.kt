@@ -1,6 +1,7 @@
 package com.example.techiess.ui.home
 
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -67,6 +68,8 @@ class HomeFragment : Fragment() {
                 intent.putExtra("rom", product.rom)
                 intent.putExtra("productID", product.productID)
 
+                Log.d(ContentValues.TAG, "DocumentSnapshot clicked with ID: ${product.productID}")
+
                 startActivity(intent)
             }
         })
@@ -102,8 +105,10 @@ class HomeFragment : Fragment() {
                     val ram = document.getString("ram") ?: ""
                     val rom = document.getString("rom") ?: ""
                     val productID = document.id
+                    var documentID = document.id
 
-                    val product = Product(title, price, image, category, OS, battery, camera, desc, display, ram, rom, productID)
+
+                    val product = Product(title, price, image, category, OS, battery, camera, desc, display, ram, rom, productID, documentID)
                     productList.add(product)
                 }
 

@@ -89,7 +89,7 @@ class CartFragment : Fragment(), CartAdapter.CartItemClickListener {
                     if (cartItems != null && cartItems.isNotEmpty()) {
                         // Calculate total amount
                         val totalAmount = calculateTotalAmount(cartItems)
-                        tvTotalAmount.text = "Total: $totalAmount"
+                        tvTotalAmount.text = "Total: RM $totalAmount"
 
                         // Navigate to the checkout activity
 
@@ -154,15 +154,20 @@ class CartFragment : Fragment(), CartAdapter.CartItemClickListener {
                         documentSnapshot.reference.delete()
                             .addOnSuccessListener {
                                 Log.d("CartFragment", "Item deleted successfully")
+                                loadUserCartData()
                             }
                             .addOnFailureListener { e ->
                                 Log.e("CartFragment", "Failed to delete item", e)
+                                loadUserCartData()
                             }
                     } else {
-                        Log.d("CartFragment", "Document not found for product ID: ${currentItem.productID}")
+                        Log.d("CartFragment", "Document not found for product ID: ${currentItem.productID}"
+                        )
+                        loadUserCartData()
                     }
                 } else {
                     Log.e("CartFragment", "Error getting documents: ", task.exception)
+                    loadUserCartData()
                 }
             }
         }
@@ -260,8 +265,8 @@ class CartFragment : Fragment(), CartAdapter.CartItemClickListener {
                     fetchProductDataAndCalculateTotalAmount()
 
                 } else {
-                    // No data
-                    // You can show a message indicating an empty cart
+                    cartAdapter.setItems(emptyList())
+                    tvTotalAmount.text = "Total: RM 0.0"
                 }
             }
         }
