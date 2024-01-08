@@ -44,7 +44,7 @@ class productDetail : AppCompatActivity() {
         val productImageImageView: ImageView = findViewById(R.id.productImageDetail)
 
         productTitleTextView.text = title
-        productPriceTextView.text = price.toString()
+        productPriceTextView.text = "RM "+ price.toString()
 
         Glide.with(this)
             .load(imageResId)

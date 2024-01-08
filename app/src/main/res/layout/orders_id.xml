@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:columnCount="2"
     android:rowCount="2"
     android:padding="16dp">
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_columnSpan="2"
         android:text="textOrderID"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textColor="@android:color/black"
         android:textStyle="bold"/>
 
@@ -28,7 +28,12 @@
         android:orientation="vertical"
         android:layout_column="0">
 
+
+
+
     </LinearLayout>
+
+
 
     <!-- 2nd column: Container for order details -->
     <TextView
@@ -39,4 +44,31 @@
         android:textSize="16sp"
         android:textColor="@android:color/black"
         android:layout_column="1"/>
+
+    <TextView
+        android:id="@+id/textTotalAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+
+        android:text="textTotalAmount"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imagesRecyclerViewContainer"
+        app:layout_constraintTop_toTopOf="@id/line" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginTop="30dp"
+        android:layout_columnSpan="2"
+        android:background="@android:color/darker_gray"
+         app:layout_constraintTop_toBottomOf="@id/textTotalAmount" />
+
+
+
 </GridLayout>

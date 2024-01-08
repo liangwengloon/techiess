@@ -1,7 +1,9 @@
 package com.example.techiess
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,6 +38,15 @@ class Orders : AppCompatActivity() {
 
         // Retrieve data from Firebase
         retrieveOrdersFromFirebase()
+
+        val backButton = findViewById<ImageView>(R.id.backButton)
+
+        backButton.setOnClickListener {
+            // Create an Intent to go back to the MainActivity
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
+            finish() // Optional: Close the current activity
+        }
     }
 
     private fun retrieveOrdersFromFirebase() {

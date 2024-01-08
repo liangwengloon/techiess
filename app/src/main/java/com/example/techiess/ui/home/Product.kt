@@ -13,9 +13,9 @@ data class Product(
     val desc: String = "",
     val display: String = "",
     val ram: String = "",
-    val image: String? = null,
     val rom: String = "",
     val productID: String = "",
-    var documentID: String = ""
+    var documentID: String = "",
+    val image: String? = null
 ) : Serializable
 

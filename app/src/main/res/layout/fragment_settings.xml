@@ -126,6 +126,7 @@
         android:onClick="onCard4Click">
 
         <LinearLayout
+            android:id="@+id/aboutUs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -160,16 +161,17 @@
         android:onClick="onCard5Click">
 
         <LinearLayout
+            android:id="@+id/myAddress"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="72dp"
                 android:layout_height="72dp"
-                android:src="@drawable/baseline_address"
-                android:contentDescription="My Address" />
+                android:contentDescription="My Address"
+                android:src="@drawable/baseline_address" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -194,16 +196,17 @@
         android:onClick="onCard6Click">
 
         <LinearLayout
+            android:id="@+id/settings2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="72dp"
                 android:layout_height="72dp"
-                android:src="@drawable/baseline_logout_24"
-                android:contentDescription="Log Out" />
+                android:contentDescription="Log Out"
+                android:src="@drawable/baseline_logout_24" />
 
             <TextView
                 android:layout_width="wrap_content"

@@ -32,7 +32,7 @@ class ProductAdapter(private var productList: List<Product>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = productList[position]
         holder.productTitle.text = product.title
-        holder.productPrice.text = product.price.toString() // Convert Double to String
+        holder.productPrice.text = "RM "+ product.price.toString() // Convert Double to String
 
         Glide.with(holder.itemView.context)
             .load(product.imageResId)

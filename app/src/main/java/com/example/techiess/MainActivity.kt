@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             val password = binding.passwordEditText.text.toString().trim()
 
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Email and passworddf are required", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Email and password are required", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F5F5F5">
+
+    <RelativeLayout
+        android:id="@+id/blueTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#4A90E2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Techies"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:layout_marginTop="20dp"/>
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/baseline_arrow_back_24"/>
+    </RelativeLayout>
+
+    <!-- Header Section -->
+    <RelativeLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="#4A90E2"
+        android:padding="16dp">
+
+        <!-- Rounded Logo -->
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/logo2" />
+
+        <!-- Company Name -->
+        <TextView
+            android:id="@+id/companyNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/logoImageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:text="Techies Corporation"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <!-- About Us Content -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headerLayout"
+        android:padding="16dp">
+
+        <!-- About Us Text -->
+        <TextView
+            android:id="@+id/aboutUsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:text="Welcome to Techies Corporation! We are a leading technology company dedicated to providing innovative solutions for our clients. Our team is passionate about creating cutting-edge software and delivering exceptional services. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/aboutUsTextView2"
+            android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:layout_below="@id/aboutUsTextView"
+            android:text="Join us on this exciting journey of technology and transformation. At Techies Corporation, we believe in turning ideas into reality, challenges into opportunities, and clients into long-term partners. Techies Corporation - Where Innovation Meets Excellence!
+"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Techiess"
         tools:targetApi="31">
         <activity
+            android:name=".myAddress"
+            android:exported="false" />
+        <activity
+            android:name=".aboutUs"
+            android:exported="false" />
+        <activity
             android:name=".contactUs"
             android:exported="false" />
         <activity

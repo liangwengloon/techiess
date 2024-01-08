@@ -23,6 +23,8 @@ class OrdersAdapter(private var ordersList: List<Order>) : RecyclerView.Adapter<
         val textOrderID: TextView = itemView.findViewById(R.id.textOrderID)
         val textProductDetails: TextView = itemView.findViewById(R.id.textProductDetails)
         val imagesRecyclerViewContainer: LinearLayout = itemView.findViewById(R.id.imagesRecyclerViewContainer)
+        val textTotalAmount: TextView = itemView.findViewById(R.id.textTotalAmount)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
@@ -37,9 +39,16 @@ class OrdersAdapter(private var ordersList: List<Order>) : RecyclerView.Adapter<
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         val currentOrder = ordersList[position]
+        val totalAmount = currentOrder.cartItems.sumByDouble { it.productPrice * it.quantity }
+
+        holder.textTotalAmount.text = "Total Amount: $totalAmount"
+        Log.d("CartAdapter", "Image URL: ${totalAmount}")
+
+
 
         // Set order ID to the text view
         holder.textOrderID.text = "Order ID: ${currentOrder.orderId}"
+
 
         // Set the product details
         val productDetailsBuilder = StringBuilder()
@@ -48,8 +57,9 @@ class OrdersAdapter(private var ordersList: List<Order>) : RecyclerView.Adapter<
             productDetailsBuilder.append("$productName\n")
 
             // Display total price for the product
-            val totalPrice = items.sumByDouble { it.productPrice * it.quantity }
+            val totalPrice = items.sumByDouble { it.productPrice }
             productDetailsBuilder.append("Price: $totalPrice\n")
+            Log.d("Price", "Price: ${totalPrice}")
 
             // Display total quantity for the product
             val totalQuantity = items.sumBy { it.quantity }

@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Custom color for the primary theme color -->
+    <color name="blue">#4A90E2</color>
+
+    <!-- Custom color for the dark variant of the theme -->
+    <color name="colorPrimaryDark">#303F9F</color>
+
+    <!-- Custom color for the accent color -->
+    <color name="colorAccent">#FF4081</color>
 </resources>

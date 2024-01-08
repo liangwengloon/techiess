@@ -1,5 +1,6 @@
 package com.example.techiess.ui.settings
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,9 +13,13 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import com.example.techiess.Checkout
+import com.example.techiess.MainActivity
 import com.example.techiess.Orders
 import com.example.techiess.R
+import com.example.techiess.aboutUs
 import com.example.techiess.changePassword
+import com.example.techiess.contactUs
+import com.example.techiess.myAddress
 import com.example.techiess.ui.settings.SettingsViewModel
 
 class Settings : Fragment() {
@@ -43,16 +48,34 @@ class Settings : Fragment() {
 
         val linearLayoutCard2 = view.findViewById<LinearLayout>(R.id.changePassword)
 
-        // Set the click listener for Card 1
         linearLayoutCard2.setOnClickListener {
             onCard2Click()
         }
 
         val linearLayoutCard3 = view.findViewById<LinearLayout>(R.id.contactUs)
 
-        // Set the click listener for Card 1
         linearLayoutCard3.setOnClickListener {
             onCard3Click()
+        }
+
+        val linearLayoutCard4 = view.findViewById<LinearLayout>(R.id.aboutUs)
+
+        linearLayoutCard4.setOnClickListener {
+            onCard4Click()
+        }
+
+        val linearLayoutCard5 = view.findViewById<LinearLayout>(R.id.myAddress)
+
+        linearLayoutCard5.setOnClickListener {
+            onCard5Click()
+
+        }
+
+        val linearLayoutCard6 = view.findViewById<LinearLayout>(R.id.settings2)
+
+        linearLayoutCard6.setOnClickListener {
+            onCard6Click()
+
         }
 
     }
@@ -69,22 +92,41 @@ class Settings : Fragment() {
     }
     private fun onCard3Click() {
         // Handle click for Card 1
-        val intent = Intent(requireContext(), Orders::class.java)
+        val intent = Intent(requireContext(), contactUs::class.java)
         startActivity(intent)
     }
     private fun onCard4Click() {
         // Handle click for Card 1
-        val intent = Intent(requireContext(), Orders::class.java)
+        val intent = Intent(requireContext(), aboutUs::class.java)
         startActivity(intent)
     }
     private fun onCard5Click() {
         // Handle click for Card 1
-        val intent = Intent(requireContext(), Orders::class.java)
+        val intent = Intent(requireContext(), myAddress::class.java)
         startActivity(intent)
     }
     private fun onCard6Click() {
         // Handle click for Card 1
-        val intent = Intent(requireContext(), Orders::class.java)
+        AlertDialog.Builder(requireContext())
+            .setTitle("Log Out")
+            .setMessage("Are you sure you want to log out?")
+            .setPositiveButton("Yes") { dialog, which ->
+                // User clicked Yes, proceed to log out
+                logOutAndRedirect()
+            }
+            .setNegativeButton("No") { dialog, which ->
+                // User clicked No, dismiss the dialog
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun logOutAndRedirect() {
+        // Handle the log out logic here
+
+        val intent = Intent(requireContext(), MainActivity::class.java)
+
         startActivity(intent)
+        requireActivity().finish()
     }
 }
